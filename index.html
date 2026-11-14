@@ -1,108 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar's Office Class Search</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .custom-banner {
-            background-color: #295078;
-            color: white;
-            padding: 15px 0;
-        }
-        .custom-banner a {
-            color: white;
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body class="d-flex flex-column min-vh-100">
-
-    <header class="container-fluid sticky-top custom-banner mb-3 shadow-sm">
-        <div class="text-center mb-3">
-            <h1 class="m-0">Registrar's Office Class Search</h1>
-        </div>
-        
-        <div class="row px-2">
-            <div class="col-sm-3 mb-2 mb-sm-0">
-                <input type="text" class="form-control" id="dept" placeholder="Department" autofocus>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      <style>
+         .header, .footer {background-color:#295078; color:white}
+         .footerlink {color: white;}
+      </style>
+      <title>Registrar's Office Class Search</title>
+   </head>
+   <body>
+      <div class="modal" id="detailsModal">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title">Registrar's Office Class Details</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+               </div>
+               <div class="modal-body" id="modalBody">
+                 Modal body; to be replaced.
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+               </div>
             </div>
-            <div class="col-sm-3 mb-2 mb-sm-0">
-                <input type="text" class="form-control" id="coursenum" placeholder="Number">
-            </div>
-            <div class="col-sm-3 mb-2 mb-sm-0">
-                <input type="text" class="form-control" id="area" placeholder="Area">
+         </div>
+      </div>
+      
+      <div class="container-fluid header sticky-top">
+         <center>
+            <h1>Registrar's Office Class Search</h1>
+         </center>
+         <div class="row">
+            <div class="col-sm-3">
+               <input class="form-control" type="text" placeholder="Department" id="dept" autofocus>
             </div>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="title" placeholder="Title">
+               <input class="form-control" type="text" placeholder="Number" id="coursenum">
             </div>
-        </div>
-    </header>
-
-    <main class="container-fluid flex-grow-1" id="resultsDiv">
-    </main>
-
-    <footer class="container-fluid sticky-bottom custom-banner mt-auto text-center shadow-sm">
-        <span>Created by <a href="#">Ranajoy Gupta</a></span>
-    </footer>
-
-    <div class="modal" id="detailsModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modalTitle">Registrar's Office Class Details</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalBody">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
+            <div class="col-sm-3">
+               <input class="form-control" type="text" placeholder="Area" id="area">
             </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
-
-    <script>
-        'use strict';
-
-        const tableTpl = `
-            <div class="table-responsive">
-                <table class="table table-striped" id="overviewsTable" rand="{{rand}}">
-                    <thead>
-                        <tr>
-                            <th>ClassId</th>
-                            <th>Dept</th>
-                            <th>Num</th>
-                            <th>Area</th>
-                            <th>Title</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#classes}}
-                        <tr>
-                            <td>
-                                <!-- A plain HTML button naturally looks like the reference -->
-                                <button onclick="fetchDetails({{classid}})">
-                                    {{classid}}
-                                </button>
-                            </td>
-                            <td>{{dept}}</td>
-                            <td>{{coursenum}}</td>
-                            <td>{{area}}</td>
-                            <td>{{title}}</td>
-                        </tr>
-                        {{/classes}}
-                    </tbody>
-                </table>
+            <div class="col-sm-3">
+               <input class="form-control" type="text" placeholder="Title" id="title">
             </div>
-        `;
-
-        const detailsTpl = `
+         </div>
+         <br>
+      </div>
+      
+      <div class="container-fluid" id="resultsDiv"></div>
+      
+      <div class="container-fluid footer sticky-bottom">
+         <center>
+            Created by <a href="#" class="footerlink">Ranajoy Gupta</a>
+         </center>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
+      <script>
+         'use strict';
+         
+         let overviewsTemplate = `
+            <table class="table table-striped" id="overviewsTable" rand="{{rand}}">
+               <thead>
+                  <tr>
+                     <th>ClassId</th>
+                     <th>Dept</th>
+                     <th>Num</th>
+                     <th>Area</th>
+                     <th>Title</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {{#classes}}
+                     <tr>
+                        <td>
+                           <button onclick="getDetails({{classid}})">{{classid}}</button>
+                        </td>
+                        <td>{{dept}}</td>
+                        <td>{{coursenum}}</td>
+                        <td>{{area}}</td>
+                        <td>{{title}}</td>
+                     </tr>
+                  {{/classes}}
+               </tbody>
+            </table>
+         `;
+         
+         let detailsTemplate = `
             <p><strong>Class Id: </strong>{{classid}}</p>
             <p><strong>Days: </strong>{{days}}</p>
             <p><strong>Start Time: </strong>{{starttime}}</p>
@@ -111,112 +97,108 @@
             <p><strong>Room: </strong>{{roomnum}}</p>
             <hr>
             <p><strong>Course Id: </strong>{{courseid}}</p>
-            <p><strong>Departments and Numbers: </strong>{{formattedDeptNums}}</p>
+            <p><strong>Departments and Numbers: </strong>{{deptcoursenums}}</p>
             <p><strong>Area: </strong>{{area}}</p>
             <p><strong>Title: </strong>{{title}}</p>
             <p><strong>Description: </strong>{{descrip}}</p>
             <p><strong>Prerequisites: </strong>{{prereqs}}</p>
-            <p><strong>Professors: </strong>{{formattedProfs}}</p>
-        `;
-
-        let overviewXhr = null;
-        let detailsXhr = null;
-        let debounceTimer = null;
-
-        function fetchOverviews() {
-            const dept = encodeURIComponent(document.getElementById('dept').value);
-            const coursenum = encodeURIComponent(document.getElementById('coursenum').value);
-            const area = encodeURIComponent(document.getElementById('area').value);
-            const title = encodeURIComponent(document.getElementById('title').value);
-
-            const url = '/regoverviews?dept=' + dept + '&coursenum=' + coursenum + '&area=' + area + '&title=' + title;
-
-            if (overviewXhr) {
-                overviewXhr.abort();
+            <p><strong>Professors: </strong>{{profnames}}</p>
+         `;
+         
+         let overviewsController = null;
+         
+         async function fetchOverviews() {
+            let dept = document.getElementById('dept').value;
+            let coursenum = document.getElementById('coursenum').value;
+            let area = document.getElementById('area').value;
+            let title = document.getElementById('title').value;
+            
+            let url = '/regoverviews?dept=' + encodeURIComponent(dept) + 
+                      '&coursenum=' + encodeURIComponent(coursenum) + 
+                      '&area=' + encodeURIComponent(area) + 
+                      '&title=' + encodeURIComponent(title);
+                      
+            if (overviewsController !== null) {
+               overviewsController.abort();
             }
-
-            overviewXhr = new XMLHttpRequest();
-            overviewXhr.open('GET', url);
+            overviewsController = new AbortController();
             
-            overviewXhr.onload = function() {
-                if (this.status !== 200) {
-                    alert('Error: Failed to fetch data from server');
-                    return;
-                }
-                const parsed = JSON.parse(this.responseText);
-                if (!parsed[0]) {
-                    alert(parsed[1]);
-                    return;
-                }
-                
-                const html = Mustache.render(tableTpl, {
-                    classes: parsed[1],
-                    rand: Math.random().toString()
-                });
-                document.getElementById('resultsDiv').innerHTML = html;
-            };
-            
-            overviewXhr.onerror = function() {
-                alert('Error: Failed to fetch data from server');
-            };
-            
-            overviewXhr.send();
-        }
-
-        function fetchDetails(classid) {
-            const url = '/regdetails?classid=' + encodeURIComponent(classid);
-
-            if (detailsXhr) {
-                detailsXhr.abort();
+            try {
+               let response = await fetch(url, { signal: overviewsController.signal });
+               if (!response.ok) throw new Error();
+               
+               let data = await response.json();
+               if (!data[0]) {
+                  alert(data[1]);
+                  return;
+               }
+               
+               let map = {
+                  classes: data[1],
+                  rand: String(Math.random())
+               };
+               let html = Mustache.render(overviewsTemplate, map);
+               document.getElementById('resultsDiv').innerHTML = html;
+            } catch (err) {
+               if (err.name !== 'AbortError') {
+                  alert('Error: Failed to fetch data from server');
+               }
             }
-
-            detailsXhr = new XMLHttpRequest();
-            detailsXhr.open('GET', url);
+         }
+         
+         let timer = null;
+         function debouncedFetchOverviews() {
+            clearTimeout(timer);
+            timer = setTimeout(fetchOverviews, 500);
+         }
+         
+         let detailsController = null;
+         
+         async function getDetails(classid) {
+            let url = '/regdetails?classid=' + encodeURIComponent(classid);
             
-            detailsXhr.onload = function() {
-                if (this.status !== 200) {
-                    alert('Error: Failed to fetch data from server');
-                    return;
-                }
-                const parsed = JSON.parse(this.responseText);
-                if (!parsed[0]) {
-                    alert(parsed[1]);
-                    return;
-                }
-                
-                const detailsData = parsed[1];
-                detailsData.formattedDeptNums = detailsData.deptcoursenums.join(', ');
-                detailsData.formattedProfs = detailsData.profnames.join(', ');
-
-                const html = Mustache.render(detailsTpl, detailsData);
-                document.getElementById('modalBody').innerHTML = html;
-                
-                const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
-                modal.show();
-            };
+            if (detailsController !== null) {
+               detailsController.abort();
+            }
+            detailsController = new AbortController();
             
-            detailsXhr.onerror = function() {
-                alert('Error: Failed to fetch data from server');
-            };
-            
-            detailsXhr.send();
-        }
-
-        function onSearchInput() {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(fetchOverviews, 500);
-        }
-
-        function init() {
-            const searchFields = ['dept', 'coursenum', 'area', 'title'];
-            searchFields.forEach(function(fieldId) {
-                document.getElementById(fieldId).addEventListener('input', onSearchInput);
-            });
+            try {
+               let response = await fetch(url, { signal: detailsController.signal });
+               if (!response.ok) throw new Error();
+               
+               let data = await response.json();
+               if (!data[0]) {
+                  alert(data[1]);
+                  return;
+               }
+               
+               let details = data[1];
+               details.deptcoursenums = details.deptcoursenums.join(', ');
+               details.profnames = details.profnames.join(', ');
+               
+               let html = Mustache.render(detailsTemplate, details);
+               document.getElementById('modalBody').innerHTML = html;
+               
+               let modalNode = document.getElementById('detailsModal');
+               let detailsModal = new bootstrap.Modal(modalNode);
+               detailsModal.show();
+            } catch (err) {
+               if (err.name !== 'AbortError') {
+                  alert('Error: Failed to fetch data from server');
+               }
+            }
+         }
+         
+         function setup() {
+            document.getElementById('dept').addEventListener('input', debouncedFetchOverviews);
+            document.getElementById('coursenum').addEventListener('input', debouncedFetchOverviews);
+            document.getElementById('area').addEventListener('input', debouncedFetchOverviews);
+            document.getElementById('title').addEventListener('input', debouncedFetchOverviews);
             
             fetchOverviews();
-        }
-
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
-</body>
+         }
+         
+         document.addEventListener('DOMContentLoaded', setup);
+      </script>
+   </body>
 </html>
