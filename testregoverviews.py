@@ -54,7 +54,7 @@ def run_test_help(page, input_values,element_name):
     element.fill(input_values[element_name])
     new_rand = overviews_table.get_attribute('rand')
     while new_rand == old_rand:
-        time.sleep(0.1) 
+        time.sleep(0.1)
         new_rand = overviews_table.get_attribute('rand')
 
 #-----------------------------------------------------------------------
