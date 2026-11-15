@@ -196,7 +196,8 @@ def details():
         class_details = get_details(classid)
 
         if class_details is None:
-            json_doc = json.dumps([False, f"no class with classid {classid} exists"])
+            err_msg = f"no class with classid {classid} exists"
+            json_doc = json.dumps([False, err_msg])
             response = flask.make_response(json_doc)
             response.headers['Content-Type'] = 'application/json'
             return response
