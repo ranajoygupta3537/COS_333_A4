@@ -82,20 +82,20 @@ def main():
     run_test(serverurl, '/regoverviews?dept=NOTADEPARTMENT')
     run_test(serverurl, '/regoverviews?coursenum=999')
 
-    run_test(serverurl, '/regoverviews?title=%25') 
-    run_test(serverurl, '/regoverviews?title=_')   
-    run_test(serverurl, '/regoverviews?title=%5C') 
-    run_test(serverurl, '/regoverviews?title=%27') 
-    run_test(serverurl, '/regoverviews?title=%22') 
+    run_test(serverurl, '/regoverviews?title=%25')
+    run_test(serverurl, '/regoverviews?title=_')
+    run_test(serverurl, '/regoverviews?title=%5C')
+    run_test(serverurl, '/regoverviews?title=%27')
+    run_test(serverurl, '/regoverviews?title=%22')
 
     run_test(serverurl, '/regdetails?classid=8321')
-    
+
     run_test(serverurl, '/regdetails?classid=9032')
 
-    run_test(serverurl, '/regdetails?classid=99999') 
-    run_test(serverurl, '/regdetails?classid=abcd')  
-    run_test(serverurl, '/regdetails?classid=')      
-    run_test(serverurl, '/regdetails')              
+    run_test(serverurl, '/regdetails?classid=99999')
+    run_test(serverurl, '/regdetails?classid=abcd')
+    run_test(serverurl, '/regdetails?classid=')
+    run_test(serverurl, '/regdetails')
 
 if __name__ == '__main__':
     main()
