@@ -20,7 +20,7 @@ def get_args():
 
     parser = argparse.ArgumentParser(
         description='Test the ability of the reg application to '
-            + 'handle "primary" (class overviews) queries')
+            + 'handle "secondary" (class details) queries')
 
     parser.add_argument(
         'serverURL', metavar='serverURL', type=str,
