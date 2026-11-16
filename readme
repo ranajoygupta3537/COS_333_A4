@@ -2,14 +2,14 @@
 
 Your full name and netid.
 
-[Enter your reply here.]
+Ranajoy Gupta - rg3537
 
 ------------------------------------------------------------------------
 
 A sentence asserting that you understand all aspects of the assignment
 solution that you submitted.
 
-[Enter your reply here.]
+I understand all aspects of the assignment solution that I submitted.
 
 ------------------------------------------------------------------------
 
@@ -23,9 +23,27 @@ must consist of sentences, each of which has one of these forms:
 -- For the ___ aspect of the assignment solution I relied on prior
    knowledge gained by ___.
 Write "None" to indicate that you received no help from any sources of
-informationn other than the lecture material.
+information other than the lecture material.
 
-[Enter your reply here.]
+For the database querying aspect of the assignment solution I relied on 
+prior knowledge gained by reading the official Python sqlite3 and 
+contextlib documentation.
+
+For the web server and JSON API aspects of the assignment solution I 
+relied on prior knowledge gained by reading the official Python flask 
+and json documentation.
+
+For the automated browser testing aspect of the assignment solution I 
+relied on prior knowledge gained by reading the official Python 
+playwright documentation.
+
+For the responsive layout and modal aspects of the assignment solution 
+I relied on prior knowledge gained by reading the official Bootstrap 
+documentation.
+
+For the client-side templating aspect of the assignment solution I 
+relied on prior knowledge gained by reading the official Mustache 
+documentation.
 
 ------------------------------------------------------------------------
 
@@ -34,20 +52,24 @@ doing the assignment. Your description must consist of lines of the
 form "aspect of your assignment solution: generative AI engines used."
 Write "None" to indicate that you received no help from generative AI.
 
-[Enter your reply here.]
+None
 
 ------------------------------------------------------------------------
 
 An indication of how much time you spent doing the assignment.
 
-[Enter your reply here.]
+About 8 hours
 
 ------------------------------------------------------------------------
 
 Your assessment of the assignment: Did it help you to learn? What did
 it help you to learn? Do you have any suggestions for improvement? Etc.
 
-[Enter your reply here.]
+I thought this assignment was an excellent progression from Assignment 3 
+because it was interesting figuring out how to completely decouple the 
+frontend from the backend by building a SPA. It was very helpful to 
+learn how to use the fetch API with AJAX to retrieve JSON data 
+asynchronously and handle debouncing.
 
 ------------------------------------------------------------------------
 
@@ -55,6 +77,6 @@ it help you to learn? Do you have any suggestions for improvement? Etc.
 the most favorable light. In particular you must describe all known
 bugs.
 
-[Enter your reply here.]
+None
 
 ------------------------------------------------------------------------
